@@ -1,12 +1,13 @@
 ---
-title: "Density"
+title: "Density Explorations"
 author: "Jens von Bergmann"
 date: '2017-08-22'
-output: html_document
+output:
+  html_document: default
+  html_notebook: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 library(cancensus)
 dir.create('images', showWarnings = FALSE) # make sure image directory exists
 dataset='CA16'
@@ -65,7 +66,7 @@ dev.off()
 ## Density in the 9 Largest Canadian Cities
 We look at the nine larges Canadian cities and map density geographicall, by area and by population.
 
-```{r density, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
+```{r density_logic, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
 #regions <- c("5915022") # city of vancouver
 regions <- list_census_regions('CA16') %>% filter(level=='CSD') %>% top_n(9,pop)
 
@@ -131,7 +132,7 @@ do_map <- function(ind){
 }
 ```
 
-```{r density, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
+```{r density_area, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
 png('images/density_area.png', width=size, height=size)
 grid.newpage()
 grid.rect()
@@ -143,7 +144,7 @@ dev.off()
 
 ![Area density](images/density_area.png)
 
-```{r density, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
+```{r density_pop, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
 png('images/density_population.png', width=size, height=size)
 vSize="Population"
 description="Density (People per hectare) by Total Population"
@@ -156,7 +157,7 @@ dev.off()
 ```
 ![Density by Population](images/density_population.png)
 
-```{r density, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
+```{r density_map, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
 png('images/density_map.png', width=size, height=size)
 grid.newpage()
 grid.rect()
